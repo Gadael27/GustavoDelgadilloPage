@@ -1,0 +1,137 @@
+/* STREAMING_CHUNK: Importando Tailwind y fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@300;400;600;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Colores de Marca */
+  --color-brand-cyan: #00f2fe;
+  --color-brand-pink: #ff007f;
+  --color-brand-purple: #aa00ff;
+  --color-brand-yellow: #ffeb3b;
+  
+  /* Fondos */
+  --color-brand-dark: #03030c;
+  --color-brand-card: #07071c;
+
+  /* Fuentes */
+  --font-cyber: 'Bangers', cursive;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* STREAMING_CHUNK: Reglas base del documento */
+body {
+margin: 0;
+background-color: var(--color-brand-dark);
+color: #ffffff;
+font-family: var(--font-body);
+overflow-x: hidden;
+}
+
+/*
+STREAMING_CHUNK: Animaciones complejas personalizadas
+Nota: Mantenemos estas animaciones en CSS puro porque son muy
+específicas y es la forma más limpia de manejarlas.
+*/
+
+@keyframes neonFlow {
+0% { background-position: 0% 50%; }
+100% { background-position: 200% 50%; }
+}
+
+@keyframes glitch {
+0% { transform: translate(0); }
+20% { transform: translate(-2px, 2px); }
+40% { transform: translate(-2px, -2px); }
+60% { transform: translate(2px, 2px); }
+80% { transform: translate(2px, -2px); }
+100% { transform: translate(0); }
+}
+
+@keyframes eq {
+0%, 100% { height: 10%; }
+50% { height: 100%; }
+}
+
+@keyframes spin {
+from { transform: rotate(0deg); }
+to { transform: rotate(360deg); }
+}
+
+@keyframes waPulseNeon {
+0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+@keyframes laserLine {
+0% { transform: translateX(-100%) rotate(-25deg); opacity: 0; }
+20% { opacity: 0.6; }
+80% { opacity: 0.6; }
+100% { transform: translateX(200%) rotate(-25deg); opacity: 0; }
+}
+
+/* STREAMING_CHUNK: Clases utilitarias globales */
+.glitch-hover:hover {
+animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+color: var(--color-brand-cyan);
+}
+
+.laser-beam {
+position: absolute;
+width: 800px;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(--color-brand-cyan), #fff, var(--color-brand-pink), transparent);
+box-shadow: 0 0 15px var(--color-brand-cyan);
+animation: laserLine 8s linear infinite;
+z-index: 2;
+pointer-events: none;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-brand-dark); }
+::-webkit-scrollbar-thumb { background: #1a1a3e; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-brand-pink); }
+
+/* STREAMING_CHUNK: Animaciones específicas de la Navbar */
+@keyframes neonFlicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+@keyframes equalizer {
+  0%, 100% { height: 4px; }
+  50% { height: 16px; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.mobile-menu-enter {
+  animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link-item {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px currentColor;
+}
+
+.nav-link-item:hover::before {
+  width: 100%;
+} 
