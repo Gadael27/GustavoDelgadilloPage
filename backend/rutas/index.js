@@ -16,8 +16,9 @@ const { db } = require('../servicios/firebase');
 // ==========================================
 // 📝 RUTAS PÚBLICAS
 // ==========================================
+const { validateReservacion } = require('./validators/reservaciones.validator');
 router.post('/contacto', formLimiter, guardarContacto);
-router.post('/reservaciones', formLimiter, crearReservacion);
+router.post('/reservaciones', formLimiter, validateReservacion, crearReservacion);
 router.post('/comprar-cabina', comprarCabina);
 router.get('/fechas-ocupadas', getFechasOcupadas);
 router.get('/blog', getBlogPosts);

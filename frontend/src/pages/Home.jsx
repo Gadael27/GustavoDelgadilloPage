@@ -1,65 +1,24 @@
-import { useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { 
-  ArrowRight, Play, Sparkles, 
-  Music, Zap, Disc, Headphones, 
-  ChevronRight, Volume2, ChevronDown
-} from 'lucide-react';
+import { Play, Music, Zap, Sparkles, ChevronDown } from 'lucide-react';
 
 import Footer from '../components/Footer';
 import GoogleReviews from '../components/GoogleReviews';
 import ServicesSection from '../components/ServicesSection';
+import HeroSection from '../components/HeroSection';
+import GenresSection from '../components/GenresSection';
+import SetsSection from '../components/SetsSection';
 
-// 📸 GALERÍA COMPLETA DE FOTOS REALES DEL PROYECTO
-import heroBackground from '../assets/premium_hero_bg.jpg';
-import heroOldBackground from '../assets/hero.png';
-import premiumTurntable from '../assets/minimalist_vinyl.jpg';
-import showLasers from '../assets/40e7af3d-94f8-418e-bfe0-6e7f11e86996.jpg';
-import disparoCo2 from '../assets/160523.jpg';
-import cabinaDenonPista from '../assets/AE69E51A-CF1E-409E-8899-B4E2D45FB79F.jpg';
-import escenarioGalactus from '../assets/Cabina DJ Blanca Diamante Frente.jpeg';
-import setupJardin from '../assets/IMG_4921.JPG';
-import consolaCloseup from '../assets/BB8F1BA0-38B6-4B43-8F62-B3A346AB7D5C.jpg';
-import consolaDJ from '../assets/IMG_4911.JPG';
-import setupExterior2 from '../assets/IMG_5401.JPG';
-import setupExterior3 from '../assets/IMG_5404.JPG';
-
-// NUEVAS FOTOS DE GÉNEROS
-import cumbiaDance from '../assets/cumbia_dance.jpg';
-import rockCrowd from '../assets/rock_crowd.jpg';
-import openFormat from '../assets/open_format.jpg';
-
-// 🎥 VIDEOS DEL PROYECTO
+// 🎥 VIDEOS Y FOTOS DE LA GALERÍA
 import videoShowUrl from '../assets/IMG_5404.MP4?url';
 import videoGenteBailando from '../assets/IMG_2958.MOV?url';
 import videoConsolaYBailando from '../assets/FE8097BE-2C22-4D19-89BA-407922426329.mp4?url';
-
-
+import consolaDJ from '../assets/IMG_4911.JPG';
+import setupJardin from '../assets/IMG_4921.JPG';
+import setupExterior2 from '../assets/IMG_5401.JPG';
+import setupExterior3 from '../assets/IMG_5404.JPG';
+import disparoCo2 from '../assets/160523.jpg';
 
 export default function Home() {
-  const [activeGenre, setActiveGenre] = useState('reggaeton');
-  const [playingSet, setPlayingSet] = useState(null);
-  const audioRef = useRef(null);
-
-  const toggleSet = (idx) => {
-    if (playingSet === idx) {
-      audioRef.current.pause();
-      setPlayingSet(null);
-    } else {
-      setPlayingSet(idx);
-      // Wait for React to update the audio src, then play
-      setTimeout(() => {
-        if (audioRef.current) {
-          audioRef.current.play().catch(e => console.log('Error reproduciendo audio', e));
-        }
-      }, 50);
-    }
-  };
-
-  const irACotizar = (tipoPaquete) => {
-    window.location.href = `/cotizacion?paquete=${tipoPaquete}`;
-  };
-
   const abrirWhatsApp = (mensajeCustom = null) => {
     const tuNumeroWhatsapp = "525567880698"; 
     const texto = mensajeCustom || "¡Hola Gustavo! Me interesa cotizar un evento en la CDMX y apartar mi fecha.";
@@ -68,44 +27,17 @@ export default function Home() {
     window.open(linkCompletoWA, '_blank', 'noopener,noreferrer');
   };
 
-
-
-  const genres = [
-    { id: 'reggaeton', name: 'Reggaetón', icon: <Music size={16} />, color: 'var(--color-brand-pink)' },
-    { id: 'electronic', name: 'Electrónica', icon: <Zap size={16} />, color: 'var(--color-brand-cyan)' },
-    { id: 'cumbia', name: 'Cumbia/Banda', icon: <Disc size={16} />, color: 'var(--color-brand-yellow)' },
-    { id: 'rock', name: 'Rock/Indie', icon: <Headphones size={16} />, color: '#ff5e00' },
-    { id: 'open', name: 'Formato Abierto', icon: <Sparkles size={16} />, color: '#bd00ff' },
-  ];
-
-
-
-  const sets = [
-    { title: "Set Reggaetón Old School", duration: "45 min", plays: "2.4k", color: "var(--color-brand-pink)", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
-    { title: "Electro House Fiesta", duration: "60 min", plays: "1.8k", color: "var(--color-brand-cyan)", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
-    { title: "Cumbia Remix En Vivo", duration: "50 min", plays: "3.1k", color: "var(--color-brand-yellow)", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
-  ];
-
   return (
     <div className="bg-[#03030c] min-h-screen text-white font-body overflow-x-hidden relative select-none">
       <Helmet>
-        <title>Gustavo Delgadillo - DJ en CDMX y Todo México | Audio Profesional</title>
-        <meta name="description" content="Contrata al mejor DJ para tu evento de música, boda o fiesta corporativa. Servicio de sonido, iluminación y renta de cabinas DJ en CDMX, Estado de México y foráneos." />
-        <meta name="keywords" content="DJ Gustavo Delgadillo, evento de musica, Sonido, renta de audio, DJ para bodas CDMX, cabinas DJ" />
+        <title>DJ Gustavo Delgadillo | Renta de Sonido y DJ para Eventos</title>
+        <meta name="description" content="Renta de DJ, renta de sonido profesional e iluminación robótica. El mejor ambiente musical 100% en vivo para tu boda o fiesta." />
+        <meta name="keywords" content="Renta de DJ, Renta de equipo de sonido, Sonido para fiestas, DJ Gustavo Delgadillo" />
       </Helmet>
-
-      <audio 
-        ref={audioRef} 
-        src={playingSet !== null ? sets[playingSet].audioSrc : undefined} 
-        loop 
-        style={{ display: 'none' }} 
-      />
-      
-      
 
       {/* 🟢 BOTÓN FLOTANTE WA */}
       <button 
-        onClick={abrirWhatsApp}
+        onClick={() => abrirWhatsApp()}
         className="wa-float border-none cursor-pointer p-0" title="Contactar por WhatsApp"
       >
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -113,97 +45,10 @@ export default function Home() {
         </svg>
       </button>
 
-      {/* 🌌 HERO SECTION EN TAILWIND */}
-      <div id="inicio" className="relative min-h-screen flex items-center bg-cover bg-center overflow-hidden pt-24 pb-16 md:py-0" style={{ 
-        backgroundImage: 'linear-gradient(to bottom, rgba(3,3,12,0.3) 0%, rgba(3,3,12,0.7) 50%, #03030c 100%), url(' + heroBackground + ')'
-      }}>
-        <div className="laser top-[30%]" />
-        <div className="laser top-[60%]" style={{ animationDelay: '4s', background: 'linear-gradient(90deg, transparent, var(--color-brand-pink), #fff, transparent)' }} />
-        
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className="absolute rounded-full opacity-30" style={{
-              width: `${4 + i * 2}px`, height: `${4 + i * 2}px`,
-              background: i % 2 === 0 ? 'var(--color-brand-pink)' : 'var(--color-brand-cyan)',
-              left: `${15 + i * 15}%`,
-              top: `${20 + (i % 3) * 25}%`,
-              boxShadow: `0 0 20px ${i % 2 === 0 ? 'var(--color-brand-pink)' : 'var(--color-brand-cyan)'}`,
-              animation: `float ${5 + i}s ease-in-out infinite alternate`
-            }} />
-          ))}
-        </div>
-
-        <div className="max-w-[1300px] mx-auto w-full px-4 md:pl-4 md:pr-8 lg:pl-4 relative z-20 grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center">
-          
-          <div className="text-center md:text-left flex flex-col items-center md:items-start lg:-ml-8 md:-translate-y-16 lg:-translate-y-24">
-            <span className="sr-only">Gustavo Delgadillo - DJ de eventos de música y Sonido Profesional</span>
-
-
-
-            <div className="inline-flex items-center gap-2.5 bg-[#ff007f1a] border border-[#ff007f4d] px-4 py-2 rounded-full mb-6 text-white text-[0.75rem] font-bold tracking-wider backdrop-blur-md select-none">
-              <Sparkles size={12} color="var(--color-brand-yellow)" /> DJ PARA FIESTAS EN CDMX • MEZCLAS EN VIVO
-            </div>
-
-            <h1 className="font-cyber m-0 leading-[1.1] drop-shadow-[0_0_40px_rgba(255,0,127,0.5)] cursor-default select-none glitch-hover flex flex-wrap items-center justify-center md:justify-start gap-4 text-[3.5rem] md:text-[5rem] lg:text-[6rem] w-full">
-              <span className="text-[var(--color-brand-pink)] whitespace-nowrap">SERVICIO DE</span>
-              <span className="text-[var(--color-brand-cyan)] whitespace-nowrap">DJ</span>
-            </h1>
-
-            <p className="text-[1.1rem] text-[#ccc] max-w-[500px] my-6 leading-relaxed font-light mx-auto md:mx-0 select-none">
-              El mejor <strong className="text-white font-bold">servicio de DJ y renta de equipo audiovisual</strong> en CDMX y Foráneo. Aparta tu fecha hoy con un anticipo y asegura el éxito de tu evento.
-            </p>
-
-            <div className="flex gap-4 flex-wrap justify-center md:justify-start">
-              <a href="/cotizacion?paquete=Base" className="bg-gradient-to-br from-[var(--color-brand-pink)] to-[#bd00ff] text-white border-none px-9 py-[18px] rounded-full text-[1.1rem] font-extrabold cursor-pointer select-none inline-flex items-center gap-2.5 shadow-[0_10px_30px_rgba(255,0,127,0.4)] transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-[0_15px_40px_rgba(255,0,127,0.6)] tracking-wider no-underline">
-                COTIZAR MI EVENTO <ArrowRight size={20} />
-              </a>
-              
-              <a 
-                href="/paquetes"
-                className="bg-white/5 text-white border border-white/20 px-9 py-[18px] rounded-full text-[1.1rem] font-semibold no-underline inline-flex select-none items-center gap-2.5 backdrop-blur-md transition-all duration-300 cursor-pointer hover:bg-white/10 hover:border-white">
-                <Disc size={20} />
-                VER PAQUETES DE DJ
-              </a>
-            </div>
-
-            <div className="mt-10 flex gap-8 items-center justify-center md:justify-start select-none">
-              <div className="flex gap-1 h-8 items-end">
-                {[...Array(5)].map((_, i) => (
-                  <div key={i} className="eq-bar h-full" />
-                ))}
-              </div>
-              <span className="text-[#888] text-[0.9rem] font-medium">
-                Escuchando ahora: <span className="text-[var(--color-brand-cyan)]">Set En Vivo - GD Producciones</span>
-              </span>
-            </div>
-          </div>
-
-          <div className="hidden md:flex relative justify-center">
-            <div className="w-[320px] h-[320px] rounded-full p-1 relative shadow-[0_0_60px_rgba(255,0,127,0.3)] bg-[conic-gradient(from_0deg,var(--color-brand-pink),var(--color-brand-cyan),var(--color-brand-yellow),var(--color-brand-pink))]">
-              <div className="w-full h-full rounded-full relative overflow-hidden vinyl-spin-slow" style={{ background: 'url(' + premiumTurntable + ') center/cover' }}>
-                <div className="absolute inset-0 bg-[repeating-radial-gradient(circle_at_center,transparent_0,transparent_10px,rgba(0,0,0,0.3)_10px,rgba(0,0,0,0.3)_12px)]" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-[#03030c] border-2 border-white/20 flex items-center justify-center">
-                  <Disc size={32} color="var(--color-brand-pink)" />
-                </div>
-              </div>
-            </div>
-            
-            <div className="absolute top-5 right-0 bg-[#07071c]/80 backdrop-blur-md border border-[var(--color-brand-cyan)]/30 rounded-2xl px-5 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.3)] select-none">
-              <div className="text-[1.8rem] font-extrabold text-[var(--color-brand-cyan)]">500+</div>
-              <div className="text-[0.8rem] text-[#aaa]">Eventos realizados</div>
-            </div>
-            
-            <div className="absolute -bottom-10 left-0 bg-[#07071c]/80 backdrop-blur-md border border-[var(--color-brand-pink)]/30 rounded-2xl px-5 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.3)] select-none">
-              <div className="text-[1.8rem] font-extrabold text-[var(--color-brand-pink)]">10+</div>
-              <div className="text-[0.8rem] text-[#aaa]">Años de experiencia</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* FIN HERO SECTION */}
+      {/* MODULARIZED SECTIONS */}
+      <HeroSection />
 
       <div className="max-w-[1200px] mx-auto px-5 w-full">
-
         
         {/* 🎥 GALERÍA MASONRY COMPLETA - SIN REPETIR FOTOS */}
         <div id="galería" className="mb-[100px]">
@@ -338,148 +183,11 @@ export default function Home() {
           </div>
         </div>
 
-        
-        {/* GÉNEROS EN TAILWIND */}
-        <div className="text-center my-[100px] md:mb-[60px]">
-          <h2 className="font-cyber text-[3rem] mb-[15px]">
-            ¿QUÉ SUENA EN TU <span className="text-[var(--color-brand-pink)]">FIESTA</span>?
-          </h2>
-          <p className="text-[#888] text-[1.1rem] mb-[40px]">
-            Selecciona un género y escucha cómo transformamos la pista
-          </p>
-          
-          <div className="flex gap-[12px] justify-center flex-wrap mb-[50px]">
-            {genres.map(g => (
-              <button 
-                key={g.id}
-                onClick={() => setActiveGenre(g.id)}
-                className={`genre-tag ${activeGenre === g.id ? 'active' : ''}`}
-                style={{ color: activeGenre === g.id ? g.color : '#aaa' }}
-              >
-                {g.icon} {g.name}
-              </button>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center bg-gradient-to-br from-[#07071c] to-[#0d0d2a] rounded-[28px] p-10 border border-white/5">
-            <div className="text-left">
-              <div className="flex items-center gap-[10px] mb-[20px] select-none">
-                <Volume2 size={24} color={genres.find(g => g.id === activeGenre)?.color || 'var(--color-brand-pink)'} />
-                <span className="font-bold text-[0.9rem] tracking-[2px] uppercase" style={{ 
-                  color: genres.find(g => g.id === activeGenre)?.color || 'var(--color-brand-pink)',
-                }}>
-                  Reproduciendo ahora
-                </span>
-              </div>
-              <h3 className="font-cyber text-[2.5rem] mb-[15px]">
-                {genres.find(g => g.id === activeGenre)?.name.toUpperCase()}
-              </h3>
-              <p className="text-[#aaa] leading-[1.7] text-[1.05rem] mb-[25px]">
-                {activeGenre === 'reggaeton' && "Desde el clásico hasta el perreo intenso. Transiciones perfectas que mantienen la pista prendida toda la noche."}
-                {activeGenre === 'electronic' && "House, Techno, EDM y Progressive. Beats que elevan la energía y crean momentos épicos en la pista."}
-                {activeGenre === 'cumbia' && "La esencia mexicana con toques modernos. Cumbia rebajada, sonidera y banda para todos los gustos."}
-                {activeGenre === 'rock' && "Alternativo, Indie, Clásicos en inglés y español. Para esos momentos de pura energía y nostalgia."}
-                {activeGenre === 'open' && "¿Por qué elegir uno solo? Mezclamos TODO en vivo. Del reggaetón al rock en segundos sin cortes abruptos."}
-              </p>
-              <div className="flex gap-[8px] h-[40px] items-end opacity-60">
-                {[...Array(12)].map((_, i) => (
-                  <div key={i} className="eq-bar w-[6px]" style={{ 
-                    animationDuration: `${0.5 + (i % 5) * 0.2}s`,
-                    background: genres.find(g => g.id === activeGenre)?.color || 'var(--color-brand-pink)'
-                  }} />
-                ))}
-              </div>
-            </div>
-            
-            <div className="rounded-[20px] overflow-hidden h-[300px] border-2 shadow-2xl transition-all duration-300" style={{ 
-              borderColor: `${genres.find(g => g.id === activeGenre)?.color || 'var(--color-brand-pink)'}40`,
-              boxShadow: `0 0 40px ${genres.find(g => g.id === activeGenre)?.color || 'var(--color-brand-pink)'}20`
-            }}>
-              <img 
-                src={
-                  activeGenre === 'electronic' ? showLasers : 
-                  activeGenre === 'cumbia' ? cumbiaDance : 
-                  activeGenre === 'rock' ? rockCrowd :
-                  activeGenre === 'open' ? openFormat :
-                  cabinaDenonPista
-                } 
-                alt="DJ en acción" 
-                className="w-full h-full object-cover transition-all duration-500"
-              />
-            </div>
-          </div>
-        </div>
-
-        
-        {/* SETS EN TAILWIND */}
-        <div id="sets" className="mb-[100px]">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-[60px] items-center">
-            <div>
-              <div className="flex items-center gap-[10px] text-[var(--color-brand-pink)] mb-[15px] font-bold tracking-[2px] text-[0.9rem]">
-                <Disc size={20} className="vinyl-spin" /> SETS RECIENTES
-              </div>
-              <h2 className="font-cyber text-[3rem] m-0 mb-[20px] leading-none">
-                ESCUCHA ANTES DE <span className="text-[var(--color-brand-cyan)]">CONTRATAR</span>
-              </h2>
-              <p className="text-[#aaa] leading-[1.7] mb-[30px] text-[1.05rem]">
-                Nuestros sets no son playlists automáticas. Son mezclas en vivo, 
-                leídas de la pista, con transiciones limpias y energía calculada.
-              </p>
-              
-              <div className="mt-[20px] flex flex-col gap-3">
-                {sets.map((set, idx) => (
-                  <div key={idx} className="flex items-center gap-4 p-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-[var(--color-brand-pink)]/10 hover:border-[var(--color-brand-pink)]/30 hover:translate-x-2 transition-all duration-300 cursor-pointer" onClick={() => toggleSet(idx)}>
-                    <div className="w-[48px] h-[48px] rounded-xl flex items-center justify-center shrink-0" style={{
-                      background: `linear-gradient(135deg, ${set.color}40, ${set.color}20)`,
-                      border: `1px solid ${set.color}60`,
-                      color: set.color
-                    }}>
-                      {playingSet === idx ? (
-                        <div className="flex gap-[3px] items-end h-[16px]">
-                          <div className="eq-bar w-1" style={{ background: set.color }} />
-                          <div className="eq-bar w-1" style={{ background: set.color, animationDelay: '0.1s' }} />
-                          <div className="eq-bar w-1" style={{ background: set.color, animationDelay: '0.2s' }} />
-                        </div>
-                      ) : (
-                        <Play size={20} fill={set.color} />
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <div className="font-bold text-[1rem] mb-1 transition-colors duration-300" style={{ color: playingSet === idx ? set.color : '#fff' }}>{set.title}</div>
-                      <div className="text-[0.85rem] text-[#666] flex gap-[12px]">
-                        <span>{set.duration}</span>
-                        <span>•</span>
-                        <span>{set.plays} reproducciones</span>
-                      </div>
-                    </div>
-                    <ChevronRight size={20} color="#444" />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="hidden md:block relative">
-              <div className="rounded-[24px] overflow-hidden border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.5)]">
-                <img src={consolaCloseup} alt="Setup" className="w-full block" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#03030ccc] to-transparent flex items-end p-[30px]">
-                  <div>
-                    <div className="inline-flex items-center gap-[8px] bg-[#00f2fe26] border border-[#00f2fe66] px-3.5 py-1.5 rounded-full mb-[10px] text-[var(--color-brand-cyan)] text-[0.8rem] font-bold">
-                      <Zap size={12} /> LIVE MIXING
-                    </div>
-                    <div className="text-[1.3rem] font-bold text-white">Consolas Denon Prime 4</div>
-                    <div className="text-[#888] text-[0.9rem]">Mezcla totalmente en vivo</div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="absolute -top-[20px] -right-[20px] w-[100px] h-[100px] rounded-[20px] bg-gradient-to-br from-[var(--color-brand-pink)] to-[#bd00ff] opacity-80 blur-[30px] -z-10" />
-            </div>
-          </div>
-        </div>
+        {/* MODULARIZED SECTIONS */}
+        <GenresSection />
+        <SetsSection />
 
         <GoogleReviews />
-
-        {/* SERVICIOS MODULARIZADOS */}
         <ServicesSection />
 
         {/* PREGUNTAS FRECUENTES (FAQ) */}

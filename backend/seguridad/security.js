@@ -2,10 +2,20 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 
 // Configuración de Helmet para proteger cabeceras HTTP
-// Desactivamos CSP para no romper MercadoPago o fuentes externas en el frontend
 const configureHelmet = () => {
   return helmet({
-    contentSecurityPolicy: false,
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "https://sdk.mercadopago.com"],
+        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+        fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
+        connectSrc: ["'self'", "https://*.mercadopago.com"],
+        frameSrc: ["'self'", "https://*.mercadopago.com"],
+        imgSrc: ["'self'", "data:", "blob:", "https://*"],
+        mediaSrc: ["'self'", "data:", "blob:", "https://*"]
+      }
+    },
     crossOriginEmbedderPolicy: false
   });
 };

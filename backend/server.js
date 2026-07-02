@@ -14,6 +14,11 @@ const routes = require('./rutas');
 const app = express();
 
 // ==========================================
+// 🛡️ CONFIGURACIÓN DE PROXY
+// ==========================================
+app.set('trust proxy', 1);
+
+// ==========================================
 // 🛡️ MIDDLEWARES GLOBALES
 // ==========================================
 app.use(configureHelmet());
