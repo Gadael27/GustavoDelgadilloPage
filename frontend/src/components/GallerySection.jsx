@@ -25,16 +25,27 @@ export default function GallerySection() {
     const videoElement = e.currentTarget.querySelector('video');
     
     if (unmutedVideoId === videoId) {
-      setUnmutedVideoId(null); // Silenciar
-      if (videoElement && !videoElement.hasAttribute('autoPlay')) {
-        videoElement.pause();
+      setUnmutedVideoId(null); // Silenciar (React state)
+      if (videoElement) {
+        videoElement.muted = true; // Sincrónico para móviles
+        if (!videoElement.hasAttribute('autoPlay')) {
+          videoElement.pause();
+        }
       }
     } else {
-      setUnmutedVideoId(videoId); // Desmutear este y silenciar los demás
+      // Silenciar a los demás videos sincrónicamente
+      document.querySelectorAll('.media-v2 video').forEach(v => {
+        v.muted = true;
+      });
+
+      setUnmutedVideoId(videoId); // Desmutear (React state)
+      
       // Pausar el reproductor del DJ para evitar empalmes
       window.dispatchEvent(new CustomEvent('pause-dj-audio'));
+      
       if (videoElement) {
-        videoElement.play();
+        videoElement.muted = false; // Sincrónico para móviles
+        videoElement.play().catch(err => console.log('Autoplay prevent:', err));
       }
     }
   };
