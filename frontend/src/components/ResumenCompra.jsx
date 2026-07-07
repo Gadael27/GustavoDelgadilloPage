@@ -33,7 +33,7 @@ export default function ResumenCompra() {
     }
 
     try {
-      const url = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const url = import.meta.env.VITE_API_URL || '';
       const response = await fetch(`${url}/api/reservaciones`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

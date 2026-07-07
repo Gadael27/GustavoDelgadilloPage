@@ -97,7 +97,7 @@ export const useCotizacionStore = create((set, get) => ({
   // LLAMADA A LA API DE FECHAS OCUPADAS
   fetchOcupadas: async () => {
     try {
-      const url = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const url = import.meta.env.VITE_API_URL || '';
       const res = await fetch(`${url}/api/fechas-ocupadas`);
       const data = await res.json();
       if (data.success && data.data) {

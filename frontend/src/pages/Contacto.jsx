@@ -38,7 +38,7 @@ export default function Contacto() {
     setCargando(true);
     
     try {
-      const baseUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+      const baseUrl = import.meta.env.VITE_BACKEND_URL || '';
       const response = await fetch(`${baseUrl}/api/contacto`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
