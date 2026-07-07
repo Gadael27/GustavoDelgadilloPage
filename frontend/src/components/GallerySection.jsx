@@ -22,12 +22,20 @@ export default function GallerySection() {
 
   const toggleMute = (e, videoId) => {
     e.preventDefault();
+    const videoElement = e.currentTarget.querySelector('video');
+    
     if (unmutedVideoId === videoId) {
       setUnmutedVideoId(null); // Silenciar
+      if (videoElement && !videoElement.hasAttribute('autoPlay')) {
+        videoElement.pause();
+      }
     } else {
       setUnmutedVideoId(videoId); // Desmutear este y silenciar los demás
       // Pausar el reproductor del DJ para evitar empalmes
       window.dispatchEvent(new CustomEvent('pause-dj-audio'));
+      if (videoElement) {
+        videoElement.play();
+      }
     }
   };
 
@@ -116,7 +124,7 @@ export default function GallerySection() {
 
         {/* 5. Video Gente Bailando */}
         <div className="media-v2 md:col-span-2 md:row-span-2 relative rounded-2xl overflow-hidden bg-[#07071c] border border-white/10 transition-all duration-500 hover:scale-105 hover:border-[var(--color-brand-cyan)] hover:shadow-[0_0_30px_rgba(0,242,254,0.2)] group cursor-pointer" onClick={(e) => toggleMute(e, 'video2')}>
-          <video src={videoGenteBailando} autoPlay loop muted={unmutedVideoId !== 'video2'} playsInline className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 saturate-[0.85] group-hover:saturate-125" />
+          <video src={videoGenteBailando} loop muted={unmutedVideoId !== 'video2'} preload="none" playsInline className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 saturate-[0.85] group-hover:saturate-125" />
           
           <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none z-10">
             <div className="w-[60px] h-[60px] rounded-full bg-[#ff007fe6] flex items-center justify-center">

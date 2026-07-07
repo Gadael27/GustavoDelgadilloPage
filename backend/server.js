@@ -33,7 +33,7 @@ const whitelist = [
 
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin || whitelist.indexOf(origin) !== -1) {
+    if (!origin || whitelist.indexOf(origin) !== -1 || origin.endsWith('.trycloudflare.com')) {
       callback(null, true);
     } else {
       callback(new Error('Bloqueado por CORS'));
