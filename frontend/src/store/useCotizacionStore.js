@@ -10,7 +10,7 @@ const validateField = (name, value) => {
       return '';
     case 'telefono':
       if (!value) return 'Teléfono obligatorio';
-      if (!/^\d{10}$/.test(value)) return '10 dígitos requeridos';
+      if (!/^\d{10}$/.test(value)) return 'Debes ingresar exactamente 10 dígitos juntos, sin espacios (ej. 5512345678)';
       return '';
     case 'correo':
       if (!value) return 'Correo obligatorio';

@@ -31,7 +31,17 @@ body {
   background-color: var(--color-brand-dark);
   color: #ffffff;
   font-family: var(--font-body);
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default; /* Avoids I-beam cursor on text without breaking keyboard scroll */
+}
+
+#root {
   overflow-x: hidden;
+}
+
+input, textarea {
+  cursor: auto;
 }
 
 .font-cyber { font-family: 'Bangers', cursive; letter-spacing: 2px; }

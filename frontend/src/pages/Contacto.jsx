@@ -71,7 +71,7 @@ export default function Contacto() {
   };
 
   return (
-    <div className="min-h-screen bg-[#03030c] pt-24 font-body overflow-hidden select-none">
+    <div className="min-h-screen bg-[#03030c] pt-24 font-body">
       <Helmet>
         <title>Contacto | GD Producciones</title>
       </Helmet>

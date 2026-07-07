@@ -1,9 +1,9 @@
-import React from 'react';
-import { Play, Sparkles, Zap, Music } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Play, Sparkles, Zap, Music, Volume2, VolumeX } from 'lucide-react';
 
 // FOTOS DE LA GALERÍA
 import videoShowUrl from '../assets/IMG_5404.MP4?url';
-import videoGenteBailando from '../assets/IMG_2958.MOV?url';
+import videoGenteBailando from '../assets/IMG_2958_opt.mp4?url';
 import videoConsolaYBailando from '../assets/FE8097BE-2C22-4D19-89BA-407922426329.mp4?url';
 import consolaDJ from '../assets/IMG_4911.JPG';
 import setupJardin from '../assets/IMG_4921.JPG';
@@ -12,6 +12,25 @@ import setupExterior3 from '../assets/IMG_5404.JPG';
 import disparoCo2 from '../assets/160523.jpg';
 
 export default function GallerySection() {
+  const [unmutedVideoId, setUnmutedVideoId] = useState(null);
+
+  useEffect(() => {
+    const handleMuteGallery = () => setUnmutedVideoId(null);
+    window.addEventListener('mute-gallery-videos', handleMuteGallery);
+    return () => window.removeEventListener('mute-gallery-videos', handleMuteGallery);
+  }, []);
+
+  const toggleMute = (e, videoId) => {
+    e.preventDefault();
+    if (unmutedVideoId === videoId) {
+      setUnmutedVideoId(null); // Silenciar
+    } else {
+      setUnmutedVideoId(videoId); // Desmutear este y silenciar los demás
+      // Pausar el reproductor del DJ para evitar empalmes
+      window.dispatchEvent(new CustomEvent('pause-dj-audio'));
+    }
+  };
+
   return (
     <div id="galería" className="mb-[100px]">
       <div className="text-center mb-[50px]">
@@ -48,14 +67,21 @@ export default function GallerySection() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[260px] gap-5">
         {/* 1. Video Show Láser */}
-        <div className="media-v2 md:col-span-2 md:row-span-1 relative rounded-2xl overflow-hidden bg-[#07071c] border border-white/10 transition-all duration-500 hover:scale-105 hover:border-[var(--color-brand-cyan)] hover:shadow-[0_0_30px_rgba(0,242,254,0.2)]">
-          <video src={videoShowUrl} autoPlay loop muted playsInline className="w-full h-full object-cover transition-transform duration-700 hover:scale-110 saturate-[0.85] hover:saturate-125" />
+        <div className="media-v2 md:col-span-2 md:row-span-1 relative rounded-2xl overflow-hidden bg-[#07071c] border border-white/10 transition-all duration-500 hover:scale-105 hover:border-[var(--color-brand-cyan)] hover:shadow-[0_0_30px_rgba(0,242,254,0.2)] cursor-pointer group" onClick={(e) => toggleMute(e, 'video1')}>
+          <video src={videoShowUrl} autoPlay loop muted={unmutedVideoId !== 'video1'} playsInline className="w-full h-full object-cover transition-transform duration-700 hover:scale-110 saturate-[0.85] hover:saturate-125" />
+          
+          <div className="absolute top-5 right-5 bg-black/50 p-2.5 rounded-full border border-white/20 backdrop-blur-md z-20 text-white hover:bg-[var(--color-brand-pink)] transition-colors opacity-0 group-hover:opacity-100">
+            {unmutedVideoId !== 'video1' ? <VolumeX size={20} /> : <Volume2 size={20} />}
+          </div>
+          
           <div className="absolute top-5 left-5 bg-[#ff007fe6] px-3.5 py-1.5 rounded-lg text-[0.8rem] font-bold flex items-center gap-1.5 z-10 text-white">
             <Play size={12} fill="#fff" /> ILUMINACIÓN SYNCHRO
           </div>
           <div className="absolute bottom-0 left-0 right-0 p-[30px] bg-gradient-to-t from-[#03030cf2] to-transparent z-10">
             <h3 className="font-cyber text-[1.8rem] m-0">SHOW LASER EN VIVO</h3>
-            <p className="text-[#aaa] mt-[5px] text-[0.9rem]">Estructuras Truss con cabezas Beam programadas al ritmo</p>
+            <p className="text-[#aaa] mt-[5px] text-[0.9rem] flex items-center gap-2">
+              Haz clic para {unmutedVideoId === 'video1' ? 'silenciar' : 'escuchar'}
+            </p>
           </div>
         </div>
 
@@ -89,19 +115,21 @@ export default function GallerySection() {
         </div>
 
         {/* 5. Video Gente Bailando */}
-        <div className="media-v2 md:col-span-2 md:row-span-2 relative rounded-2xl overflow-hidden bg-[#07071c] border border-white/10 transition-all duration-500 hover:scale-105 hover:border-[var(--color-brand-cyan)] hover:shadow-[0_0_30px_rgba(0,242,254,0.2)] group">
-          <video src={videoGenteBailando} autoPlay loop muted playsInline className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 saturate-[0.85] group-hover:saturate-125" />
+        <div className="media-v2 md:col-span-2 md:row-span-2 relative rounded-2xl overflow-hidden bg-[#07071c] border border-white/10 transition-all duration-500 hover:scale-105 hover:border-[var(--color-brand-cyan)] hover:shadow-[0_0_30px_rgba(0,242,254,0.2)] group cursor-pointer" onClick={(e) => toggleMute(e, 'video2')}>
+          <video src={videoGenteBailando} autoPlay loop muted={unmutedVideoId !== 'video2'} playsInline className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 saturate-[0.85] group-hover:saturate-125" />
+          
           <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none z-10">
             <div className="w-[60px] h-[60px] rounded-full bg-[#ff007fe6] flex items-center justify-center">
-              <Play size={28} fill="#fff" color="#fff" />
+              {unmutedVideoId !== 'video2' ? <VolumeX size={28} color="#fff" /> : <Volume2 size={28} color="#fff" />}
             </div>
           </div>
+
           <div className="absolute top-5 right-5 bg-[#00f2fee6] px-3.5 py-1.5 rounded-lg text-[0.75rem] font-extrabold text-[#03030c] z-20 tracking-widest">
             PISTA LLENA
           </div>
           <div className="absolute bottom-0 left-0 right-0 p-[30px] bg-gradient-to-t from-[#03030cf2] to-transparent z-20">
             <h3 className="font-cyber text-[2rem] m-0">LA GENTE NO PARA</h3>
-            <p className="text-[#aaa] mt-[5px] text-[0.9rem]">Ambiente real de pista de baile</p>
+            <p className="text-[#aaa] mt-[5px] text-[0.9rem]">Haz clic para {unmutedVideoId === 'video2' ? 'silenciar' : 'escuchar'} el ambiente</p>
           </div>
         </div>
 
@@ -116,13 +144,15 @@ export default function GallerySection() {
         </div>
 
         {/* 7. Video Consola + Gente */}
-        <div className="media-v2 md:col-span-2 relative rounded-2xl overflow-hidden bg-[#07071c] border border-white/10 transition-all duration-500 hover:scale-105 hover:border-[var(--color-brand-cyan)] hover:shadow-[0_0_30px_rgba(0,242,254,0.2)] group">
-          <video src={videoConsolaYBailando} autoPlay loop muted playsInline className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 saturate-[0.85] group-hover:saturate-125" />
+        <div className="media-v2 md:col-span-2 relative rounded-2xl overflow-hidden bg-[#07071c] border border-white/10 transition-all duration-500 hover:scale-105 hover:border-[var(--color-brand-cyan)] hover:shadow-[0_0_30px_rgba(0,242,254,0.2)] group cursor-pointer" onClick={(e) => toggleMute(e, 'video3')}>
+          <video src={videoConsolaYBailando} autoPlay loop muted={unmutedVideoId !== 'video3'} playsInline className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 saturate-[0.85] group-hover:saturate-125" />
+          
           <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none z-10">
-            <div className="w-[50px] h-[50px] rounded-full bg-[#00f2fee6] flex items-center justify-center">
-              <Play size={22} fill="#fff" color="#fff" />
+            <div className="w-[50px] h-[50px] rounded-full bg-[#00f2fee6] flex items-center justify-center text-[#03030c]">
+              {unmutedVideoId !== 'video3' ? <VolumeX size={22} /> : <Volume2 size={22} />}
             </div>
           </div>
+
           <div className="absolute top-[15px] left-[15px] bg-[#ffeb3be6] px-2.5 py-1 rounded-md text-[0.7rem] font-extrabold text-[#03030c] z-20">
             BEHIND THE DECKS
           </div>

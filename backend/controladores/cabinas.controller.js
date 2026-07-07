@@ -10,11 +10,23 @@ const comprarCabina = async (req, res) => {
     }
 
     const cleanNombre = sanitizeText(nombre);
-    const precioNumerico = Number(String(precioStr).replace(/,/g, ''));
+    // DICCIONARIO DE PRECIOS SEGURO (Mapeo por ID)
+    const preciosCabinas = {
+      1: 8500, // Cabina Negra Diamante Premium
+      2: 8900, // Cabina Blanca Diamante Luxury
+      3: 11200, // Cabina Diamante Espejo Oro
+      4: 10800, // Cabina Diamante Espejo Plata
+      5: 7900, // Cabina Negra Triángulos Rave
+      6: 8200, // Cabina Negra Minimal Rayado
+      7: 8400  // Cabina Blanca Triángulos
+    };
 
-    if (isNaN(precioNumerico) || precioNumerico <= 0) {
-      return res.status(400).json({ success: false, error: 'Precio inválido.' });
+    const precioNumerico = preciosCabinas[cabinaId];
+
+    if (!precioNumerico) {
+      return res.status(400).json({ success: false, error: 'Cabina no válida o precio no encontrado.' });
     }
+
 
     const docRef = await db.collection('ventas_cabinas').add({
       cabinaId,

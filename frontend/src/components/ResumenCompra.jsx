@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CreditCard, ShieldCheck } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useCotizacionStore } from '../store/useCotizacionStore';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
@@ -11,14 +12,23 @@ export default function ResumenCompra() {
   } = useCotizacionStore();
 
   const { totalEvent, extraHoursCost, peopleAdditionalCost, saldoPendiente, montoPagar } = calculateTotal();
+  const [submitError, setSubmitError] = useState(null);
 
   const handleSubmitContract = async (e) => {
     e.preventDefault();
-    if (!isFormValid()) return;
+    setSubmitError(null);
+    
+    if (!isFormValid()) {
+      const currentErrors = useCotizacionStore.getState().errors;
+      const fieldNames = { nombre: 'Nombre', apellido: 'Apellido', telefono: 'Teléfono', correo: 'Correo', calleYNumero: 'Calle', colonia: 'Colonia', alcaldia: 'Alcaldía', codigoPostal: 'C.P.', fecha: 'Fecha' };
+      const missing = Object.keys(currentErrors).map(k => `${fieldNames[k] || k} (${currentErrors[k]})`).join(', ');
+      setSubmitError(`Por favor revisa: ${missing}`);
+      return;
+    }
 
     const phoneNumber = parsePhoneNumberFromString(formData.telefono, 'MX');
     if (!phoneNumber || !phoneNumber.isValid()) {
-      alert('Número de teléfono inválido. Asegúrate de incluir la lada correcta.');
+      setSubmitError('El teléfono parece ser inventado o la LADA no existe. Por favor ingresa un número de México real (10 dígitos).');
       return;
     }
 
@@ -29,7 +39,9 @@ export default function ResumenCompra() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           ...formData, 
-          telefono: phoneNumber.format('E.164'), 
+          fecha: `${formData.fecha.getFullYear()}-${String(formData.fecha.getMonth() + 1).padStart(2, '0')}-${String(formData.fecha.getDate()).padStart(2, '0')}`,
+          horaInicio: `${String(formData.horaInicio.getHours()).padStart(2, '0')}:${String(formData.horaInicio.getMinutes()).padStart(2, '0')}`,
+          telefono: formData.telefono, // Send the exact 10 digits, avoid E.164 +52 since backend expects exactly 10 digits
           direccion: `${formData.calleYNumero}, Col. ${formData.colonia}, Alc/Mun ${formData.alcaldia}, CP ${formData.codigoPostal}`, 
           totalEvent, 
           paymentType, 
@@ -44,10 +56,10 @@ export default function ResumenCompra() {
         setIsRedirecting(true);
         setTimeout(() => { window.location.href = data.init_point; }, 2200);
       } else {
-        alert(data.error || 'Error al procesar la reserva.');
+        setSubmitError(data.error || 'Error al procesar la reserva.');
       }
     } catch {
-      alert('Error de conexión con el servidor.');
+      setSubmitError('Error de conexión con el servidor.');
     }
   };
 
@@ -124,10 +136,16 @@ export default function ResumenCompra() {
           )}
         </div>
 
-        <button onClick={handleSubmitContract} type="button" disabled={isRedirecting || isTimeSlotBlocked} className={`w-full py-4 rounded-xl text-white text-lg font-bold uppercase tracking-wide flex items-center justify-center gap-3 transition-all ${isTimeSlotBlocked ? 'bg-gray-700 cursor-not-allowed opacity-50' : 'bg-gradient-to-r from-blue-500 to-blue-700 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(59,130,246,0.4)]'}`}>
+        <button onClick={handleSubmitContract} type="button" disabled={isRedirecting || isTimeSlotBlocked} className={`w-full py-4 rounded-xl text-white text-lg font-bold uppercase tracking-wide flex items-center justify-center gap-3 transition-all ${(isTimeSlotBlocked) ? 'bg-gray-700 cursor-not-allowed opacity-50' : 'bg-gradient-to-r from-blue-500 to-blue-700 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(59,130,246,0.4)]'}`}>
           <CreditCard size={22} />
           {isRedirecting ? 'Procesando...' : `Pagar ${paymentType === 'completo' ? 'completo' : 'anticipo'}`}
         </button>
+
+        {submitError && (
+          <div className="mt-4 bg-red-500/10 border border-red-500/50 p-3 rounded-xl text-red-400 text-sm font-bold text-center">
+            {submitError}
+          </div>
+        )}
 
         {isRedirecting && (
           <div className="mt-4 bg-cyan-400/10 border border-cyan-400/30 p-3 rounded-xl flex items-center justify-center gap-3">

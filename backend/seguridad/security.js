@@ -30,7 +30,7 @@ const generalLimiter = rateLimit({
 // Rate limiter estricto para formularios públicos (contacto, reservaciones)
 const formLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 hora
-  max: 10, // Límite de 10 peticiones por hora por IP para evitar spam
+  max: 50, // Temporalmente en 50 para pruebas (Producción ideal: 10)
   message: { success: false, error: 'Has enviado demasiados formularios. Por favor, comunícate directamente por WhatsApp.' }
 });
 

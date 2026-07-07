@@ -26,7 +26,7 @@ export default function Blog() {
   }, []);
 
   return (
-    <div className="select-none" style={{
+    <div style={{
       background: 'linear-gradient(135deg, #03030c 0%, #0a0a1a 100%)',
       minHeight: '100vh',
       color: '#fff',

@@ -70,7 +70,7 @@ export default function Paquetes() {
   ];
 
   return (
-    <div className="min-h-screen bg-brand-dark pt-24 pb-20 px-4 md:px-8 font-body overflow-hidden select-none">
+    <div className="min-h-screen bg-brand-dark pt-24 pb-20 px-4 md:px-8 font-body">
       <div className="max-w-[1200px] mx-auto text-center mb-20">
         <h1 className="font-cyber text-[3.5rem] md:text-[5rem] text-white leading-tight mb-6 mt-8">
           NUESTROS <span className="text-brand-pink drop-shadow-[0_0_20px_rgba(255,0,127,0.5)]">PAQUETES</span>

@@ -26,7 +26,8 @@ const validateEmail = async (email) => {
       return { valid: false, error: 'El servidor de correo no existe (Dominio inválido).' };
     }
   } catch (error) {
-    return { valid: false, error: 'No se pudo verificar la existencia del dominio del correo.' };
+    console.warn(`[DNS] No se pudo verificar MX para ${domain}:`, error.message);
+    // No bloqueamos si falla la red o el DNS local
   }
 
   return { valid: true, email: cleanEmail };

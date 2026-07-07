@@ -14,6 +14,7 @@ const TerminosCondiciones = React.lazy(() => import('./pages/TerminosCondiciones
 const PoliticasCancelacion = React.lazy(() => import('./pages/PoliticasCancelacion'));
 const Paquetes = React.lazy(() => import('./pages/Paquetes'));
 const Contacto = React.lazy(() => import('./pages/Contacto'));
+const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 // A simple loading spinner component to show while the chunk downloads
 function LoadingScreen() {
@@ -33,6 +34,24 @@ function ScrollToTop() {
       window.scrollTo(0, 0);
     }
   }, [pathname]);
+
+  // Global fix for keyboard scrolling when user-select: none prevents native focus
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        window.scrollBy({ top: 60, left: 0, behavior: 'auto' });
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        window.scrollBy({ top: -60, left: 0, behavior: 'auto' });
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown, { passive: false });
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return null;
 }
@@ -60,6 +79,7 @@ function App() {
               <Route path="/terminos-condiciones" element={<TerminosCondiciones />} />
               <Route path="/politicas-cancelacion" element={<PoliticasCancelacion />} />
               <Route path="/contacto" element={<Contacto />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
         </main>

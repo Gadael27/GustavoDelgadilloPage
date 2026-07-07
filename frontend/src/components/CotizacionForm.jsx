@@ -19,7 +19,13 @@ export default function CotizacionForm() {
     handleChange, handleBlur, setPackageType, setExtraHours, setPeopleRange
   } = useCotizacionStore();
 
-  const handlePhoneChange = (e) => handleChange('telefono', e.target.value.replace(/\D/g, '').slice(0, 10));
+  const handlePhoneChange = (e) => {
+    let val = e.target.value.replace(/\D/g, '');
+    if (val.startsWith('52') && val.length > 10) {
+      val = val.slice(2);
+    }
+    handleChange('telefono', val.slice(0, 10));
+  };
 
   return (
     <div className="flex flex-col gap-8">

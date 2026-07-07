@@ -20,7 +20,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-[#03030c] min-h-screen text-white font-body overflow-x-hidden relative select-none">
+    <div className="bg-[#03030c] min-h-screen text-white font-body relative">
       <Helmet>
         <title>DJ Gustavo Delgadillo | Renta de Sonido y DJ para Eventos</title>
         <meta name="description" content="Renta de DJ, renta de sonido profesional e iluminación robótica. El mejor ambiente musical 100% en vivo para tu boda o fiesta." />
