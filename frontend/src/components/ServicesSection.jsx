@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { MapPin, HelpCircle } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import PackageCard from './PackageCard';
-import FaqAccordion from './FaqAccordion';
 
 export default function ServicesSection() {
   const navigate = useNavigate();
@@ -44,24 +43,7 @@ export default function ServicesSection() {
     }
   ];
 
-  const faqs = [
-    {
-      q: '¿Qué tipo de evento es y qué música tocan?',
-      a: 'Cubrimos Bodas, XV Años, Fiestas de Élite y Corporativos. La selección musical es totalmente abierta y adaptada a tus peticiones o géneros preferidos en vivo.'
-    },
-    {
-      q: '¿Cómo influye si el espacio es abierto o cerrado?',
-      a: 'Para espacios interiores calibramos el audio para evitar reverberación. En exteriores (jardines o terrazas) recomendamos el paquete Premium con 4 bocinas para garantizar que la presión del sonido no se disipe al aire libre.'
-    },
-    {
-      q: '¿Cuántas personas pueden cubrir los precios base?',
-      a: 'El precio base cubre eventos de 10 a 100 personas. Para aforos mayores, el sistema aplica un ajuste automático en la pestaña de Cotización debido a la necesidad de añadir más infraestructura de refuerzo sonoro.'
-    },
-    {
-      q: '¿Realizan eventos fuera de la Ciudad de México?',
-      a: 'Nuestros precios de lista están optimizados para la CDMX. Si tu evento es al interior de la república, puedes presionar el botón de WhatsApp para cotizar los viáticos de transporte de la infraestructura.'
-    }
-  ];
+
 
   const handleReserve = (id) => {
     navigate(`/cotizacion?paquete=${id}`);
@@ -163,13 +145,6 @@ export default function ServicesSection() {
         </div>
       </div>
 
-      {/* FAQS */}
-      <div className="max-w-[800px] mx-auto">
-        <h2 className="text-[3rem] text-white text-center mb-[30px] font-bangers">
-          <HelpCircle className="inline mr-2.5 align-middle" /> PREGUNTAS FRECUENTES
-        </h2>
-        <FaqAccordion faqs={faqs} />
-      </div>
     </div>
   );
 }
