@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { ShieldCheck, Receipt, Clock, Mic2 } from 'lucide-react';
 import PackageCard from '../components/PackageCard';
 
-import imgBase from '../assets/IMG_4911.JPG';
-import imgPro from '../assets/IMG_5401.JPG';
-import imgPremium from '../assets/IMG_5404.JPG';
+import imgBase from '../assets/GD/Paquete_basico.jpeg';
+import imgPro1 from '../assets/GD/paquete_pro.jpeg';
+import imgPro2 from '../assets/GD/montaje_pro.jpeg';
+import imgPremium1 from '../assets/GD/montaje_premium.jpeg';
+import imgPremium2 from '../assets/GD/servicio_premium.jpeg';
 
 export default function Paquetes() {
   const navigate = useNavigate();
@@ -21,17 +23,15 @@ export default function Paquetes() {
   const paquetes = [
     {
       id: 'Base',
-      name: 'Paquete Esencial',
+      name: 'Paquete Básico',
       price: '$5,500 MXN',
       color: '#00f2fe',
-      image: imgBase,
+      images: [imgBase],
       features: [
-        '5 Horas de servicio continuo',
-        'Audio profesional lineal para 50-80 personas',
-        'Iluminación básica (Par LEDs)',
-        'DJ Profesional mezclando en vivo',
-        'Entrevista previa para selección musical',
-        'Micrófono alámbrico para anuncios'
+        'Cabina DJ',
+        'Controlador profesional',
+        'Bocina EV o JBL de 15"',
+        '5 Horas de servicio'
       ]
     },
     {
@@ -39,32 +39,40 @@ export default function Paquetes() {
       name: 'Paquete Pro',
       price: '$7,500 MXN',
       color: '#ff007f',
-      image: imgPro,
+      images: [imgPro1, imgPro2],
       features: [
-        '5 Horas de servicio continuo',
-        'Audio lineal de alta fidelidad para hasta 150 personas',
-        'Estructura iluminada (Cabina DJ)',
-        'Iluminación robótica (Cabezas móviles)',
-        'Máquina de humo convencional',
-        'DJ Profesional formato abierto',
-        '2 Micrófonos inalámbricos'
+        'Montaje pro',
+        'Cabina DJ',
+        'Controlador profesional',
+        '2 bocinas 15"',
+        '1 subwoofer 18"',
+        '1 pantalla de 42"',
+        '2 cabezas robóticas',
+        '2 lasers rgb',
+        '1 máquina de humo',
+        '5 Horas de servicio'
       ]
     },
     {
       id: 'Premium',
-      name: 'Experiencia Premium',
+      name: 'Paquete Premium',
       price: '$9,900 MXN',
       color: '#ffeb3b',
-      image: imgPremium,
+      images: [imgPremium1, imgPremium2],
       features: [
-        '7 Horas de servicio continuo',
-        'Audio lineal Premium para hasta 300 personas',
-        'Show láser espectacular',
-        'Máquina de humo pesado (Bailar en las nubes)',
-        'Pirotecnia fría (Chispas sin fuego)',
-        'Iluminación robótica avanzada sincronizada DMX',
-        'DJ Profesional y animador',
-        'Souvenirs básicos (Globos, pulseras neón)'
+        'Montaje premium (imagen ilustrativa)',
+        'Cabina DJ',
+        'Controlador profesional',
+        '2 bocinas 15"',
+        '1 subwoofer 18"',
+        '1 pantalla de 42" (en renta pantalla de 3m x 2m pitch 2.6)',
+        '6 cabezas robóticas',
+        '2 lasers rgb',
+        '2 estrobos',
+        '1 máquina de humo',
+        '1 máquina CO2 lanza confeti',
+        '4 disparos Pirotecnia de luz fría',
+        '5 Horas de servicio'
       ]
     }
   ];
@@ -91,10 +99,12 @@ export default function Paquetes() {
               {/* Resplandor detrás de la imagen */}
               <div className="absolute -inset-4 bg-gradient-to-r blur-2xl opacity-30 group-hover:opacity-60 transition-opacity duration-700" style={{ backgroundImage: `linear-gradient(to right, ${pkg.color}, transparent)` }}></div>
               
-              <div className="relative rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)] border border-white/10 z-10">
-                <img src={pkg.image} alt={pkg.name} className="w-full h-[350px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent opacity-80"></div>
-                <div className="absolute bottom-6 left-6 flex items-center gap-3">
+              <div className={`relative rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)] border border-white/10 z-10 ${pkg.images.length > 1 ? 'grid grid-cols-1 sm:grid-cols-2 gap-1' : ''}`}>
+                {pkg.images.map((img, i) => (
+                  <img key={i} src={img} alt={pkg.name} className={`w-full ${pkg.images.length > 1 ? 'h-[250px] md:h-[500px]' : 'h-[350px] md:h-[500px]'} object-cover transition-transform duration-700 group-hover:scale-105`} />
+                ))}
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent opacity-80 pointer-events-none"></div>
+                <div className="absolute bottom-6 left-6 flex items-center gap-3 z-20">
                   <div className="w-3 h-3 rounded-full animate-pulse" style={{ background: pkg.color, boxShadow: `0 0 10px ${pkg.color}` }}></div>
                   <span className="text-white font-cyber tracking-widest uppercase text-sm" style={{ color: pkg.color }}>Visualización del Paquete</span>
                 </div>

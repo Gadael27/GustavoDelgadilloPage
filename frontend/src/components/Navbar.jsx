@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Calendar, Store, BookOpen, Home, Menu, X, Package, Phone } from 'lucide-react';
 
 // Importamos el logo oficial desde assets
-import miLogoOfficial from '../assets/Logo.jpeg';
+import miLogoOfficial from '../assets/GD/Logo_GD_ByN.jpeg';
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

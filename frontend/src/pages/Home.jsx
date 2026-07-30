@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import GoogleReviews from '../components/GoogleReviews';
 import ServicesSection from '../components/ServicesSection';
 import HeroSection from '../components/HeroSection';
+import BioSection from '../components/BioSection';
 import GenresSection from '../components/GenresSection';
 import SetsSection from '../components/SetsSection';
 
@@ -42,6 +43,8 @@ export default function Home() {
 
       <div className="max-w-[1200px] mx-auto px-5 w-full">
         
+        <BioSection />
+
         <GallerySection />
 
         {/* MODULARIZED SECTIONS */}
