@@ -2,7 +2,7 @@ import React from 'react';
 import { Music, Star, Disc3 } from 'lucide-react';
 import gusFoto1 from '../assets/GD/Gus_Foto_1.jpeg';
 import gusFoto2 from '../assets/GD/Gus_Foto_2.jpeg';
-import logoGDByN from '../assets/GD/Logo_GD_ByN.jpeg';
+import logoGDText from '../assets/GD/Logo_GD_Text.jpeg';
 
 export default function BioSection() {
   return (
@@ -40,7 +40,7 @@ export default function BioSection() {
           </div>
           
           <div className="mb-8 relative max-w-[400px]">
-            <img src={logoGDByN} alt="Gustavo Delgadillo Logo" className="w-full h-auto mix-blend-screen opacity-90 transition-all duration-500 hover:opacity-100 hover:scale-[1.02]" style={{ filter: 'drop-shadow(0 0 20px rgba(0,242,254,0.4))' }} />
+            <img src={logoGDText} alt="Gustavo Delgadillo Logo" className="w-full h-auto mix-blend-screen opacity-90 transition-all duration-500 hover:opacity-100 hover:scale-[1.02]" style={{ filter: 'drop-shadow(0 0 20px rgba(0,242,254,0.4))' }} />
           </div>
           
           <p className="text-gray-300 text-lg md:text-xl leading-relaxed mb-8 max-w-2xl font-light">
