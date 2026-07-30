@@ -61,28 +61,7 @@ export default function GallerySection() {
         </p>
       </div>
 
-      {/* CONEXIÓN HUMANA: CONOCE A TU DJ */}
-      <div className="flex flex-col md:flex-row items-center gap-8 bg-white/5 border border-white/10 rounded-3xl p-8 mb-16 shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-brand-pink/10 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
-        <div className="w-full md:w-1/3 flex-shrink-0">
-          <div className="rounded-2xl overflow-hidden shadow-lg border border-brand-pink/20 relative">
-            <img src="/Logo.jpeg" alt="Gustavo Delgadillo DJ" className="w-full h-[250px] object-cover saturate-110" />
-          </div>
-        </div>
-        <div className="w-full md:w-2/3 text-left">
-          <h3 className="font-cyber text-2xl text-[var(--color-brand-pink)] mb-4">¿QUIÉN PONDRÁ EL AMBIENTE?</h3>
-          <p className="text-gray-300 text-lg leading-relaxed mb-4">
-            "Mi objetivo no es solo poner música, es crear la <strong>banda sonora perfecta</strong> para tu evento."
-          </p>
-          <p className="text-gray-400 leading-relaxed mb-6">
-            Al contratar nuestros servicios, te garantizo trato directo y personalizado. <strong>Nada de intermediarios ni agencias sin rostro.</strong> Estaré contigo desde la entrevista inicial para entender tus gustos, hasta el último minuto en la pista de baile asegurando que la energía nunca caiga.
-          </p>
-          <div className="flex gap-4">
-            <span className="bg-brand-cyan/10 text-[var(--color-brand-cyan)] px-4 py-1.5 rounded-full text-sm font-semibold border border-brand-cyan/20">Trato Directo</span>
-            <span className="bg-brand-pink/10 text-[var(--color-brand-pink)] px-4 py-1.5 rounded-full text-sm font-semibold border border-brand-pink/20">+10 Años Experiencia</span>
-          </div>
-        </div>
-      </div>
+
 
       <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[260px] gap-5">
         {/* 1. Video Show Láser */}
