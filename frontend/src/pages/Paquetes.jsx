@@ -79,15 +79,48 @@ export default function Paquetes() {
         </p>
       </div>
 
-      {/* GRID DE PAQUETES */}
-      <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-        {paquetes.map(pkg => (
-          <PackageCard 
-            key={pkg.id}
-            service={pkg} 
-            onReserve={handleReserve} 
-          />
-        ))}
+      {/* ZIGZAG DE PAQUETES */}
+      <div className="max-w-[1200px] mx-auto flex flex-col gap-24 mb-20">
+        {paquetes.map((pkg, index) => {
+          const isEven = index % 2 === 0;
+          
+          return (
+            <div key={pkg.id} className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 lg:gap-20 items-stretch animate-fadeIn`}>
+              
+              {/* LADO DE LAS IMÁGENES */}
+              <div className="w-full lg:w-1/2 relative group h-full min-h-[400px] md:min-h-[550px]">
+                {/* Resplandor detrás de la imagen */}
+                <div className="absolute -inset-4 bg-gradient-to-r blur-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none" style={{ backgroundImage: `linear-gradient(to right, ${pkg.color}, transparent)` }}></div>
+                
+                <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)] border border-white/10 z-10 bg-black flex flex-col">
+                  {pkg.images.length === 1 ? (
+                    <img src={pkg.images[0]} alt={pkg.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 flex-1" />
+                  ) : (
+                    <div className="grid grid-rows-2 h-full w-full flex-1">
+                      <img src={pkg.images[0]} alt={pkg.name + ' 1'} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 border-b border-white/10" />
+                      <img src={pkg.images[1]} alt={pkg.name + ' 2'} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    </div>
+                  )}
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent opacity-80 pointer-events-none"></div>
+                  <div className="absolute bottom-6 left-6 flex items-center gap-3 z-20">
+                    <div className="w-3 h-3 rounded-full animate-pulse" style={{ background: pkg.color, boxShadow: `0 0 10px ${pkg.color}` }}></div>
+                    <span className="text-white font-cyber tracking-widest uppercase text-sm" style={{ color: pkg.color }}>Visualización del Paquete</span>
+                  </div>
+                </div>
+              </div>
+              
+              {/* LADO DE LA TARJETA */}
+              <div className="w-full lg:w-1/2 h-full">
+                <PackageCard 
+                  service={pkg} 
+                  onReserve={handleReserve} 
+                />
+              </div>
+
+            </div>
+          );
+        })}
       </div>
       
       {/* SECCIÓN DE TRANSPARENCIA / LETRA CHICA */}

@@ -17,21 +17,6 @@ export default function PackageCard({ service, onReserve }) {
       }}
       onClick={() => onReserve(service.id)}
     >
-      {/* IMÁGENES DEL PAQUETE */}
-      {service.images && service.images.length > 0 && (
-        <div className={`w-full h-72 md:h-80 relative overflow-hidden shrink-0 border-b border-white/10 ${service.images.length > 1 ? 'grid grid-rows-2' : ''}`}>
-          {service.images.map((img, idx) => (
-            <img 
-              key={idx}
-              src={img} 
-              alt={`${service.name} ${idx + 1}`} 
-              className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${idx > 0 ? 'border-t border-white/10' : ''}`}
-            />
-          ))}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a1a] via-transparent to-transparent pointer-events-none opacity-80 z-10"></div>
-        </div>
-      )}
-
       {/* CONTENIDO DE LA TARJETA */}
       <div style={{ padding: '30px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
         
