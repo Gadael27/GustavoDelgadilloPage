@@ -39,8 +39,8 @@ export default function BioSection() {
             <span className="text-brand-cyan font-bold tracking-widest text-xs uppercase">El DJ Detrás de la Fiesta</span>
           </div>
           
-          <div className="mb-8 relative max-w-[400px]">
-            <img src={logoGDByN} alt="Gustavo Delgadillo Logo" className="w-full h-auto mix-blend-screen opacity-90 transition-all duration-500 hover:opacity-100 hover:scale-[1.02]" style={{ filter: 'drop-shadow(0 0 20px rgba(0,242,254,0.4))' }} />
+          <div className="mb-4 relative w-full max-w-[500px] h-[120px] md:h-[150px] overflow-hidden flex items-center">
+            <img src={logoGDByN} alt="Gustavo Delgadillo Logo" className="w-full h-[250%] object-cover object-center mix-blend-screen opacity-90 transition-all duration-500 hover:opacity-100 hover:scale-105" style={{ filter: 'drop-shadow(0 0 20px rgba(0,242,254,0.4))' }} />
           </div>
           
           <p className="text-gray-300 text-lg md:text-xl leading-relaxed mb-8 max-w-2xl font-light">
