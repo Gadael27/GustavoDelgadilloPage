@@ -68,7 +68,7 @@ export default function Navbar() {
           
           {/* Redes Sociales con hover neón */}
           <div className="flex items-center gap-3 border-r border-[#141435] pr-4">
-            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" 
+            <a href="https://www.facebook.com/marketplace/profile/529622851/?ref=permalink&mibextid=6ojiHh" target="_blank" rel="noopener noreferrer" 
                className="text-[#888] flex items-center transition-all duration-300 p-1.5 rounded-lg hover:text-brand-cyan hover:bg-brand-cyan/10 hover:shadow-[0_0_15px_rgba(0,242,254,0.3)]">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>

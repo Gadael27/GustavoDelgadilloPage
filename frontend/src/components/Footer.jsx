@@ -45,7 +45,7 @@ export default function Footer() {
           <h4 className="text-white text-[0.9rem] tracking-[2px] mb-5 uppercase font-bold">Síguenos</h4>
           <div className="flex gap-3">
             
-            <a href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white transition-all duration-300 hover:bg-[var(--color-brand-pink)] hover:border-[var(--color-brand-pink)]">
+            <a href="https://www.facebook.com/marketplace/profile/529622851/?ref=permalink&mibextid=6ojiHh" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white transition-all duration-300 hover:bg-[var(--color-brand-pink)] hover:border-[var(--color-brand-pink)]">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
