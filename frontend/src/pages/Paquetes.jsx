@@ -33,6 +33,13 @@ export default function Paquetes() {
         'Controlador y microfonía',
         'Luces básicas de pista',
         '5 Horas de música continua'
+      ],
+      fullFeatures: [
+        'Cabina DJ',
+        'Controlador profesional',
+        'Bocina EV o JBL de 15"',
+        'Microfonía para protocolo',
+        '5 Horas de servicio'
       ]
     },
     {
@@ -47,6 +54,18 @@ export default function Paquetes() {
         'Luces robóticas y láser RGB',
         'Máquina de humo atmosférico',
         '5 Horas de música continua'
+      ],
+      fullFeatures: [
+        'Montaje pro',
+        'Cabina DJ',
+        'Controlador profesional',
+        '2 bocinas 15"',
+        '1 subwoofer 18"',
+        '1 pantalla de 42"',
+        '2 cabezas robóticas',
+        '2 lasers rgb',
+        '1 máquina de humo',
+        '5 Horas de servicio'
       ]
     },
     {
@@ -60,6 +79,21 @@ export default function Paquetes() {
         'Pantalla LED gigante (opcional)',
         'Show de luces, láser y humo pesado',
         'Pirotecnia fría y CO2 Confeti',
+        '7 Horas (5 base + 2 incluidas)'
+      ],
+      fullFeatures: [
+        'Montaje premium (imagen ilustrativa)',
+        'Cabina DJ',
+        'Controlador profesional',
+        '2 bocinas 15"',
+        '1 subwoofer 18"',
+        '1 pantalla de 42" (en renta pantalla de 3m x 2m pitch 2.6)',
+        '6 cabezas robóticas',
+        '2 lasers rgb',
+        '2 estrobos',
+        '1 máquina de humo',
+        '1 máquina CO2 lanza confeti',
+        '4 disparos Pirotecnia de luz fría',
         '7 Horas (5 base + 2 incluidas)'
       ]
     }
