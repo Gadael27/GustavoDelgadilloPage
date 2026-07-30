@@ -308,7 +308,7 @@ export default function CotizacionForm() {
         </div>
         <div className="bg-green-500/10 border border-green-500/30 p-4 rounded-xl text-center">
           <p className="text-gray-300 text-sm mb-4">Si te encuentras fuera de CDMX o Área Metropolitana, contáctanos.</p>
-          <button type="button" onClick={() => window.location.href = 'https://wa.me/525567880698'} className="w-full bg-gradient-to-r from-green-400 to-green-500 hover:from-green-500 hover:to-green-600 text-black font-bold py-3 rounded-xl flex items-center justify-center gap-2 uppercase text-sm tracking-wide transition-transform hover:-translate-y-1 shadow-[0_4px_15px_rgba(37,211,102,0.3)]">
+          <button type="button" onClick={() => window.location.href = 'https://wa.me/525630626476'} className="w-full bg-gradient-to-r from-green-400 to-green-500 hover:from-green-500 hover:to-green-600 text-black font-bold py-3 rounded-xl flex items-center justify-center gap-2 uppercase text-sm tracking-wide transition-transform hover:-translate-y-1 shadow-[0_4px_15px_rgba(37,211,102,0.3)]">
             <MessageSquare size={16} /> Cotizar por WhatsApp
           </button>
         </div>

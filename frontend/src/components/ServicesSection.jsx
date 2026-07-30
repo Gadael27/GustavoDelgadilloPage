@@ -50,7 +50,7 @@ export default function ServicesSection() {
   };
 
   const abrirWhatsApp = () => {
-    const tuNumeroWhatsapp = "525567880698"; 
+    const tuNumeroWhatsapp = "525630626476"; 
     const mensaje = encodeURIComponent("¡Hola, GD Producciones! Me interesa cotizar un evento fuera de la CDMX.");
     window.open(`https://wa.me/${tuNumeroWhatsapp}?text=${mensaje}`, '_blank', 'noopener,noreferrer');
   };

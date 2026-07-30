@@ -394,7 +394,7 @@ export default function CompraCabina() {
               </div>
               <div className="flex gap-2 items-start">
                 <Ruler size={14} className="shrink-0 mt-0.5 text-[var(--color-brand-pink)]" />
-                <span>¿Buscas una cabina a medida? <a href="https://wa.me/525567880698" target="_blank" className="text-[var(--color-brand-pink)] hover:underline font-bold">Contáctanos por WhatsApp</a>.</span>
+                <span>¿Buscas una cabina a medida? <a href="https://wa.me/525630626476" target="_blank" className="text-[var(--color-brand-pink)] hover:underline font-bold">Contáctanos por WhatsApp</a>.</span>
               </div>
             </div>
 

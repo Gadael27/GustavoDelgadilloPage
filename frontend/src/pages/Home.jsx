@@ -12,7 +12,7 @@ import FAQSection from '../components/FAQSection';
 
 export default function Home() {
   const abrirWhatsApp = (mensajeCustom = null) => {
-    const tuNumeroWhatsapp = "525567880698"; 
+    const tuNumeroWhatsapp = "525630626476"; 
     const texto = mensajeCustom || "¡Hola Gustavo! Me interesa cotizar un evento en la CDMX y apartar mi fecha.";
     const mensajeURL = encodeURIComponent(texto);
     const linkCompletoWA = `https://wa.me/${tuNumeroWhatsapp}?text=${mensajeURL}`;
