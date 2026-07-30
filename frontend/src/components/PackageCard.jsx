@@ -19,7 +19,7 @@ export default function PackageCard({ service, onReserve }) {
     >
       {/* IMAGEN DEL PAQUETE */}
       {service.image && (
-        <div className="w-full h-48 md:h-56 relative overflow-hidden shrink-0 border-b border-white/10">
+        <div className="w-full h-72 md:h-80 relative overflow-hidden shrink-0 border-b border-white/10">
           <img 
             src={service.image} 
             alt={service.name} 
