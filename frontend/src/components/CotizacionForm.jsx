@@ -20,11 +20,9 @@ export default function CotizacionForm() {
   } = useCotizacionStore();
 
   const handlePhoneChange = (e) => {
-    let val = e.target.value.replace(/\D/g, '');
-    if (val.startsWith('52') && val.length > 10) {
-      val = val.slice(2);
-    }
-    handleChange('telefono', val.slice(0, 10));
+    // Solo permitir números, espacios, guiones y el símbolo +
+    let val = e.target.value.replace(/[^\d\s\-\+]/g, '');
+    handleChange('telefono', val.slice(0, 16));
   };
 
   return (
@@ -123,11 +121,14 @@ export default function CotizacionForm() {
             <Users size={14} /> Número de Asistentes
           </label>
           <select value={peopleRange} onChange={e => setPeopleRange(e.target.value)} className="w-full p-4 rounded-xl bg-[#0a0a1a] text-white text-base border border-[#2a2a4e] outline-none cursor-pointer">
-            <option value="10-100">10 a 100 personas (Precio base)</option>
-            <option value="100-200">100 a 200 personas (+$3,000)</option>
-            <option value="200-300">200 a 300 personas (+$5,500)</option>
-            <option value="300+">300 o más personas (+$7,500)</option>
+            <option value="10-100">10 a 100 personas (Incluido en paquete)</option>
+            <option value="100-200">100 a 200 personas (+$3,000 MXN - Requiere audio extra)</option>
+            <option value="200-300">200 a 300 personas (+$5,500 MXN - Audio masivo)</option>
+            <option value="300+">300 o más personas (+$7,500 MXN - Montaje concierto)</option>
           </select>
+          <p className="text-xs text-gray-500 mt-2">
+            Nuestros paquetes base cubren eventos íntimos de hasta 100 personas. Para una mayor audiencia se añade equipo de audio de alta capacidad.
+          </p>
         </div>
       </div>            
       
@@ -246,8 +247,10 @@ export default function CotizacionForm() {
           <div className="bg-red-500/10 border-2 border-red-500 p-4 rounded-xl flex items-start gap-3 mt-2 mb-4">
             <AlertTriangle size={22} className="text-red-500 shrink-0 mt-0.5" />
             <div>
-              <div className="text-red-400 font-bold text-sm mb-1">Horario no disponible</div>
-              <div className="text-red-300/80 text-xs leading-relaxed">Este horario interfiere con otro evento agendado o con el tiempo de traslado (+3 hrs).</div>
+              <div className="text-red-400 font-bold text-sm mb-1">Horario no disponible para esta duración</div>
+              <div className="text-red-300/80 text-xs leading-relaxed">
+                Debido a la duración de tu paquete (incluyendo horas extra), este horario interfiere con otro evento ya agendado. Por favor abre el selector de <b>Hora de Inicio</b> y elige otra hora (las horas ocupadas aparecen bloqueadas/en gris).
+              </div>
             </div>
           </div>
         )}

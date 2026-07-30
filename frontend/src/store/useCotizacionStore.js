@@ -10,7 +10,7 @@ const validateField = (name, value) => {
       return '';
     case 'telefono':
       if (!value) return 'Teléfono obligatorio';
-      if (!/^\d{10}$/.test(value)) return 'Debes ingresar exactamente 10 dígitos juntos, sin espacios (ej. 5512345678)';
+      if (value.replace(/\D/g, '').length < 10) return 'El teléfono debe tener al menos 10 dígitos';
       return '';
     case 'correo':
       if (!value) return 'Correo obligatorio';
@@ -157,7 +157,7 @@ export const useCotizacionStore = create((set, get) => ({
     const { packageType, extraHours, peopleRange, paymentType } = get();
     let serviceBasePrice = 5500;
     if (packageType === 'Pro') serviceBasePrice = 7500;
-    else if (packageType === 'Premium') serviceBasePrice = 7500;
+    else if (packageType === 'Premium') serviceBasePrice = 9900;
     
     const extraHoursCost = extraHours * 1200;
     let peopleAdditionalCost = 0;

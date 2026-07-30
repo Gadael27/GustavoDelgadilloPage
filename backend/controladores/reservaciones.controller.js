@@ -50,12 +50,16 @@ const crearReservacion = asyncHandler(async (req, res) => {
   // Gestión de Cliente
   let clienteRef = await findOrCreateCliente(emailValidation.email, cleanNombre + ' ' + cleanApellido, phoneValidation.phone, 'Reservacion');
 
-  let serviceBasePrice = packageType === 'Premium' ? 7500 : 5500;
+  let serviceBasePrice = 5500;
+  if (packageType === 'Pro') serviceBasePrice = 7500;
+  else if (packageType === 'Premium') serviceBasePrice = 9900;
+
   const extraHoursCost = Number(extraHours || 0) * 1200;
 
   let peopleAdditionalCost = 0;
   if (peopleRange === '100-200') peopleAdditionalCost = 3000;
   else if (peopleRange === '200-300') peopleAdditionalCost = 5500;
+  else if (peopleRange === '300+') peopleAdditionalCost = 7500;
 
   const totalCalculado = serviceBasePrice + extraHoursCost + peopleAdditionalCost;
   const anticipoCalculado = 1500;

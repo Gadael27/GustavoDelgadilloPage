@@ -174,7 +174,7 @@ export default function Paquetes() {
           Podemos armar un paquete personalizado con pantallas LED, pista iluminada, letras gigantes y más amenidades.
         </p>
         <button 
-          onClick={() => navigate('/cotizacion?paquete=Custom')}
+          onClick={() => window.open('https://wa.me/525630626476?text=Hola,%20me%20interesa%20armar%20un%20paquete%20a%20la%20medida%20para%20mi%20evento', '_blank')}
           className="bg-transparent border-2 border-brand-cyan text-brand-cyan px-8 py-3 rounded-full font-bold uppercase tracking-widest hover:bg-brand-cyan hover:text-brand-dark transition-all duration-300 shadow-[0_0_15px_rgba(0,242,254,0.3)]"
         >
           Armar mi propio paquete
