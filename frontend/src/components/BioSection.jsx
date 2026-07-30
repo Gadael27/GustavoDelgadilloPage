@@ -5,7 +5,7 @@ import gusFoto2 from '../assets/GD/Gus_Foto_2.jpeg';
 
 export default function BioSection() {
   return (
-    <section className="py-20 relative z-10" id="bio">
+    <section className="py-20 relative z-10 font-body" id="bio">
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-cyan/30 to-transparent"></div>
       
       <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center justify-between">

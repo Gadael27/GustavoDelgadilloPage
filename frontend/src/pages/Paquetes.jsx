@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { ShieldCheck, Receipt, Clock, Mic2 } from 'lucide-react';
 import PackageCard from '../components/PackageCard';
@@ -11,6 +11,7 @@ import imgPremium2 from '../assets/GD/servicio_premium.jpeg';
 
 export default function Paquetes() {
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState('Pro');
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -77,52 +78,74 @@ export default function Paquetes() {
     }
   ];
 
+  const activePkg = paquetes.find(p => p.id === activeTab);
+
   return (
     <div className="min-h-screen bg-brand-dark pt-24 pb-20 px-4 md:px-8 font-body">
-      <div className="max-w-[1200px] mx-auto text-center mb-20">
+      <div className="max-w-[1200px] mx-auto text-center mb-12">
         <h1 className="font-cyber text-[3.5rem] md:text-[5rem] text-white leading-tight mb-6 mt-8">
           NUESTROS <span className="text-brand-pink drop-shadow-[0_0_20px_rgba(255,0,127,0.5)]">PAQUETES</span>
         </h1>
         <p className="text-gray-400 text-[1.1rem] md:text-[1.3rem] max-w-3xl mx-auto leading-relaxed mb-4">
-          Diseñados para adaptarse al tamaño de tu evento y a tus expectativas. Desde una fiesta íntima hasta la boda de tus sueños con producción audiovisual completa.
+          Diseñados para adaptarse al tamaño de tu evento y a tus expectativas. Selecciona el paquete que mejor se adapte a tu celebración.
         </p>
         <p className="text-brand-cyan/70 text-sm max-w-2xl mx-auto border border-brand-cyan/20 bg-brand-cyan/5 p-3 rounded-lg">
           ⚠️ Precios expresados en Pesos Mexicanos (MXN). Servicio disponible únicamente dentro de la República Mexicana.
         </p>
       </div>
 
-      <div className="max-w-[1200px] mx-auto flex flex-col gap-20">
-        {paquetes.map((pkg, idx) => (
-          <div key={pkg.id} className={`flex flex-col lg:flex-row gap-8 lg:gap-16 items-center ${idx % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
-            
-            <div className="w-full lg:w-1/2 relative group">
-              {/* Resplandor detrás de la imagen */}
-              <div className="absolute -inset-4 bg-gradient-to-r blur-2xl opacity-30 group-hover:opacity-60 transition-opacity duration-700" style={{ backgroundImage: `linear-gradient(to right, ${pkg.color}, transparent)` }}></div>
-              
-              <div className={`relative rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)] border border-white/10 z-10 ${pkg.images.length > 1 ? 'grid grid-cols-1 sm:grid-cols-2 gap-1' : ''}`}>
-                {pkg.images.map((img, i) => (
-                  <img key={i} src={img} alt={pkg.name} className={`w-full ${pkg.images.length > 1 ? 'h-[250px] md:h-[500px]' : 'h-[350px] md:h-[500px]'} object-cover transition-transform duration-700 group-hover:scale-105`} />
-                ))}
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent opacity-80 pointer-events-none"></div>
-                <div className="absolute bottom-6 left-6 flex items-center gap-3 z-20">
-                  <div className="w-3 h-3 rounded-full animate-pulse" style={{ background: pkg.color, boxShadow: `0 0 10px ${pkg.color}` }}></div>
-                  <span className="text-white font-cyber tracking-widest uppercase text-sm" style={{ color: pkg.color }}>Visualización del Paquete</span>
-                </div>
+      {/* TABS */}
+      <div className="flex justify-center gap-4 mb-16 px-4 flex-wrap max-w-[1200px] mx-auto">
+        {paquetes.map((pkg) => (
+          <button
+            key={pkg.id}
+            onClick={() => setActiveTab(pkg.id)}
+            className={`px-8 py-4 rounded-xl font-bold uppercase tracking-widest transition-all duration-300 border-2 ${
+              activeTab === pkg.id 
+                ? 'text-[#03030c] shadow-[0_0_30px_rgba(255,255,255,0.15)] scale-105' 
+                : 'bg-transparent text-gray-400 hover:text-white border-white/10 hover:border-white/30 hover:bg-white/5'
+            }`}
+            style={activeTab === pkg.id ? { background: pkg.color, borderColor: pkg.color } : {}}
+          >
+            {pkg.name}
+          </button>
+        ))}
+      </div>
+
+      <div className="max-w-[1200px] mx-auto flex flex-col lg:flex-row gap-12 lg:gap-20 items-stretch animate-fadeIn">
+        
+        <div className="w-full lg:w-1/2 relative group h-full">
+          {/* Resplandor detrás de la imagen */}
+          <div className="absolute -inset-4 bg-gradient-to-r blur-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none" style={{ backgroundImage: `linear-gradient(to right, ${activePkg.color}, transparent)` }}></div>
+          
+          <div className="relative h-full min-h-[400px] md:min-h-[550px] w-full rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)] border border-white/10 z-10 bg-black flex flex-col">
+            {activePkg.images.length === 1 ? (
+              <img src={activePkg.images[0]} alt={activePkg.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 flex-1" />
+            ) : (
+              <div className="grid grid-rows-2 h-full w-full flex-1">
+                <img src={activePkg.images[0]} alt={activePkg.name + ' 1'} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 border-b border-white/10" />
+                <img src={activePkg.images[1]} alt={activePkg.name + ' 2'} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
-            </div>
+            )}
             
-            <div className="w-full lg:w-1/2">
-              <PackageCard 
-                service={pkg} 
-                onReserve={handleReserve} 
-              />
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent opacity-80 pointer-events-none"></div>
+            <div className="absolute bottom-6 left-6 flex items-center gap-3 z-20">
+              <div className="w-3 h-3 rounded-full animate-pulse" style={{ background: activePkg.color, boxShadow: `0 0 10px ${activePkg.color}` }}></div>
+              <span className="text-white font-cyber tracking-widest uppercase text-sm" style={{ color: activePkg.color }}>Visualización del Paquete</span>
             </div>
           </div>
-        ))}
+        </div>
+        
+        <div className="w-full lg:w-1/2 h-full">
+          <PackageCard 
+            service={activePkg} 
+            onReserve={handleReserve} 
+          />
+        </div>
       </div>
       
       {/* SECCIÓN DE TRANSPARENCIA / LETRA CHICA */}
-      <div className="max-w-[1200px] mx-auto mt-20 mb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4 md:px-0">
+      <div className="max-w-[1200px] mx-auto mt-24 mb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4 md:px-0">
         <div className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
           <ShieldCheck className="text-brand-pink mb-4" size={32} />
           <h4 className="text-white font-bold text-lg mb-2">Apartado Seguro</h4>
