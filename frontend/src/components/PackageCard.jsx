@@ -5,25 +5,37 @@ export default function PackageCard({ service, onReserve }) {
 
   return (
     <div 
-      className={`group select-none ${isPremium ? "shadow-[0_0_60px_rgba(255,0,127,0.2)] hover:shadow-[0_0_80px_rgba(255,0,127,0.4)]" : "glass-card hover:shadow-[0_0_50px_rgba(0,242,254,0.3)]"} transition-all duration-500`}
+      className={`group select-none flex flex-col ${isPremium ? "shadow-[0_0_60px_rgba(255,0,127,0.2)] hover:shadow-[0_0_80px_rgba(255,0,127,0.4)]" : "glass-card hover:shadow-[0_0_50px_rgba(0,242,254,0.3)]"} transition-all duration-500`}
       style={{
-        padding: '45px 35px', 
         borderRadius: '16px', 
         cursor: 'pointer',
         background: isPremium ? 'linear-gradient(135deg, #0a0a24, #150820)' : 'rgba(10, 10, 36, 0.7)',
         border: `2px solid ${service.color}`, 
         position: 'relative', 
         overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
         height: '100%'
       }}
       onClick={() => onReserve(service.id)}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '20px' }}>
-        <div>
-          <h3 className="font-cyber" style={{ fontSize: '2.4rem', color: service.color, margin: '0', letterSpacing: '1px' }}>{service.name}</h3>
+      {/* IMAGEN DEL PAQUETE */}
+      {service.image && (
+        <div className="w-full h-48 md:h-56 relative overflow-hidden shrink-0 border-b border-white/10">
+          <img 
+            src={service.image} 
+            alt={service.name} 
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a1a] to-transparent pointer-events-none opacity-80"></div>
         </div>
+      )}
+
+      {/* CONTENIDO DE LA TARJETA */}
+      <div style={{ padding: '30px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+        
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '20px' }}>
+          <div>
+            <h3 className="font-cyber" style={{ fontSize: '2.4rem', color: service.color, margin: '0', letterSpacing: '1px' }}>{service.name}</h3>
+          </div>
         {!isPremium && (
           <div style={{ 
             padding: '8px 16px', borderRadius: '20px', background: `${service.color}1a`,
@@ -94,6 +106,7 @@ export default function PackageCard({ service, onReserve }) {
             `AGENDAR PAQUETE ${service.id}`
           )}
         </button>
+      </div>
       </div>
     </div>
   );

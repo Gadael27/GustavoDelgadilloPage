@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { ShieldCheck, Receipt, Clock, Mic2 } from 'lucide-react';
 import PackageCard from '../components/PackageCard';
 
+import imgBase from '../assets/GD/Paquete_basico.jpeg';
+import imgPro from '../assets/GD/paquete_pro.jpeg';
+import imgPremium from '../assets/GD/servicio_premium.jpeg';
+
 export default function Paquetes() {
   const navigate = useNavigate();
 
@@ -20,6 +24,7 @@ export default function Paquetes() {
       name: 'Paquete Básico',
       price: '$5,500',
       color: '#00f2fe',
+      image: imgBase,
       features: [
         'Sonido para eventos íntimos',
         'Cabina DJ Iluminada',
@@ -33,6 +38,7 @@ export default function Paquetes() {
       name: 'Paquete Pro',
       price: '$7,500',
       color: '#ff007f',
+      image: imgPro,
       features: [
         'Sonido Pro + Subwoofer 18"',
         'Montaje visual con pantalla 42"',
@@ -46,6 +52,7 @@ export default function Paquetes() {
       name: 'Paquete Premium',
       price: '$9,900',
       color: '#ffeb3b',
+      image: imgPremium,
       features: [
         'Sonido Masivo de concierto',
         'Pantalla LED gigante (opcional)',
