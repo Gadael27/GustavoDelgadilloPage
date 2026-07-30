@@ -2,7 +2,6 @@ import React from 'react';
 import { Music, Star, Disc3 } from 'lucide-react';
 import gusFoto1 from '../assets/GD/Gus_Foto_1.jpeg';
 import gusFoto2 from '../assets/GD/Gus_Foto_2.jpeg';
-import logoGDText from '../assets/GD/Logo_GD_Text.jpeg';
 
 export default function BioSection() {
   return (
@@ -39,9 +38,9 @@ export default function BioSection() {
             <span className="text-brand-cyan font-bold tracking-widest text-xs uppercase">El DJ Detrás de la Fiesta</span>
           </div>
           
-          <div className="mb-8 relative max-w-[400px]">
-            <img src={logoGDText} alt="Gustavo Delgadillo Logo" className="w-full h-auto mix-blend-screen opacity-90 transition-all duration-500 hover:opacity-100 hover:scale-[1.02]" style={{ filter: 'drop-shadow(0 0 20px rgba(0,242,254,0.4))' }} />
-          </div>
+          <h2 className="font-cyber text-[3rem] md:text-[4.5rem] leading-[1.1] mb-6 drop-shadow-[0_0_15px_rgba(255,0,127,0.3)]">
+            GUSTAVO <span className="text-brand-pink block">DELGADILLO</span>
+          </h2>
           
           <p className="text-gray-300 text-lg md:text-xl leading-relaxed mb-8 max-w-2xl font-light">
             Con años de trayectoria transformando eventos en la Ciudad de México y toda la República. 
